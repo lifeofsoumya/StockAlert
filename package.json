@@ -1,0 +1,18 @@
+{
+  "name": "data-api-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "node-cron": "^3.0.0",
+    "process": "^0.11.10",
+    "puppeteer": "^13.4.1"
+  }
+}
