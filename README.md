@@ -13,4 +13,4 @@
 
 - User Management yet to be added
 
-- LocalHost is working whereas Online server is throwing error.
+- LocalHost is working, deployment causing error.
