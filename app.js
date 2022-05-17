@@ -30,7 +30,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
     const [el] = await page.$x('/html/body/div/div/div[2]/div[2]/div/div/div[1]/div/div/table/tbody/tr[1]/td[1]/a');        // select specific element on the url fetched page with 'xpath' & assign it to el
     const text = await el.getProperty('textContent');       // choose type of data needed
-    const name = await text.jsonValue();    // extract the data type
+    const stName = await text.jsonValue();    // extract the data type
 
     const [el2] = await page.$x('/html/body/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/table/tbody/tr[1]/td[3]/text()');
     const priceSrc = await el2.getProperty('textContent');
@@ -73,10 +73,12 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
             let mailDetails = {
                 from: process.env.GID1,
-                to: process.env.TO,
+                to: process.env.TO1,
                 subject: `Your Stock is Down by ${percentage}%`,
-                text: `${process.env.GNM1}, Your Stock named ${name}, is Down by ${percentage}%, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}`,
-                HTMl: '<img src="https://media.discordapp.net/attachments/795866620412428330/964879836504023050/promo-indgeek.png" width="100%">'
+                text: `Hi ${process.env.GNM1},
+                Your Stock named '${stName}', is Down by '${percentage}%',
+                Current price '${priceVal}'.
+                The 52 Week high price is '${highVal}' & 52 Weeks low is '${lowVal}'`,
             };
 
             console.log("Message fetched");
@@ -112,7 +114,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
     
     stockApi = {
-        stocksName : name,
+        stocksName : stName,
         currentPrice: priceVal,
         lowPrice: lowVal,
         highPrice : highVal,
