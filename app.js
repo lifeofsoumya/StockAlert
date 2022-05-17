@@ -63,8 +63,8 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
             const mailTransporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.GID,
-                    pass: process.env.GPW
+                    user: process.env.GID1,
+                    pass: process.env.GPW1
                 },
                 tls: {
                     rejectUnauthorized: false
@@ -72,10 +72,11 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
             });
 
             let mailDetails = {
-                from: process.env.GID,
+                from: process.env.GID1,
                 to: process.env.TO,
                 subject: `Your Stock is Down by ${percentage}%`,
-                HTMl: `<p>Your Stock named ${name}, is <b>Down by ${percentage}%</b>, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}</p>`
+                text: `<p>Your Stock named ${name}, is <b>Down by ${percentage}%</b>, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}</p>`,
+                HTMl: '<img src="https://media.discordapp.net/attachments/795866620412428330/964879836504023050/promo-indgeek.png" width="100%">'
             };
 
             console.log("Message fetched");
@@ -84,7 +85,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 if(err) {
                     console.log('Error Occurs ' + err);
                 } else {
-                    console.log('Email sent successfully');
+                    console.log('Email sent successfully ' + data);
                 }
             });
         }
