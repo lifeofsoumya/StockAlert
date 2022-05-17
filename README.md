@@ -9,8 +9,6 @@
 
 ## Optimizations
 
-- Multiple stocks can be tracked with Page evaluate function
+- Users can sign up to receive Emails about stocks
 
-- User Management yet to be added
-
-- LocalHost is working, deployment causing error.
+- Dynamic html to be fetched with email

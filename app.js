@@ -12,7 +12,7 @@ const app = express()
 app.use(bodyParser.json());
 
 
-cron.schedule('0 10,14 * * *', async () => { // runs everyday at 10am and 2pm
+cron.schedule('* * * * *', async () => { // runs everyday at 10am and 2pm //0 10,15
     console.log('cron working')
     await scrapeChannel('https://groww.in/markets/top-losers?index=GIDXNIFTY100')
 }); 
