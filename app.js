@@ -72,8 +72,10 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 from: process.env.GID,
                 to: process.env.TO,
                 subject: `Your Stock is Down by ${percentage}%`,
-                HTMl: `Your Stock named ${name}, is Down by ${percentage}%, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}`
+                HTMl: `<p>Your Stock named ${name}, is <b>Down by ${percentage}%</b>, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}</p>`
             };
+
+            console.log("Message fetched");
 
             mailTransporter.sendMail(mailDetails, function(err, data) {
                 if(err) {
@@ -84,7 +86,6 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
             });
         }
     }
-    else console.log('Less than 10')
 
     // page.evaluate(() => {
     //     let allTitles = document.querySelectorAll('.mtp438CompanyName');
