@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const cron = require('node-cron');
 const bodyParser = require('body-parser')
+const nodemailer = require('nodemailer')
 
 // const { title } = require('process');
 
@@ -56,9 +57,9 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
     let percentage = parseFloat(pTemp).toFixed(2)
     
     if (percentage*100 < 1000){ // by multiplying 100 to both side
-        console.log('ok less than 10 percent');
+        console.log('More than 10 percent');
     }
-    else console.log('More than 10')
+    else console.log('Less than 10')
 
     // page.evaluate(() => {
     //     let allTitles = document.querySelectorAll('.mtp438CompanyName');
