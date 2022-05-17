@@ -3,6 +3,8 @@ const express = require('express');
 const cron = require('node-cron');
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
+const path = require('path')
+var hbs = require('nodemailer-express-handlebars');
 require('dotenv').config()
 
 // const { title } = require('process');
@@ -12,7 +14,7 @@ const app = express()
 app.use(bodyParser.json());
 
 
-cron.schedule('* * * * *', async () => { // runs everyday at 10am and 2pm //0 10,15
+cron.schedule('0 10,15 * * *', async () => { // runs everyday at 10am and 2pm //0 10,15
     console.log('cron working')
     await scrapeChannel('https://groww.in/markets/top-losers?index=GIDXNIFTY100')
 }); 
@@ -71,12 +73,30 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 }
             });
 
+            const handlebarOptions = {
+                viewEngine: {
+                    extName: ".handlebars",
+                    partialsDir: path.resolve('./views'),
+                    defaultLayout: false,
+                },
+                viewPath: path.resolve('./views'),
+                extName: ".handlebars",
+                }
+            
+            mailTransporter.use('compile', hbs(handlebarOptions));
+
             let mailDetails = {
                 from: process.env.GID1,
                 to: process.env.TO1,
                 subject: `Your Stock is Down by ${percentage}%`,
-                text: `Hi ${process.env.GNM1},
-                Your Stock named 🚀 '${stName}', is Down by 📉 '${percentage}%'. Current price 💰 '${priceVal}' And the 52 Week high price is 🔼 '${highVal}' & 52 Weeks low is 🔽 '${lowVal}'`,
+                template: 'email',
+                context: {
+                    name: stName,
+                    pct: percentage,
+                    pVal: priceVal,
+                    hVal: highVal,
+                    lVal: lowVal
+                }
             };
 
             console.log("Message fetched");

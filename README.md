@@ -11,4 +11,4 @@
 
 - Users can sign up to receive Emails about stocks
 
-- Dynamic html to be fetched with email
+- Dynamic html template to be fetched with email using handlebars

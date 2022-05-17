@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Stock Market Price dropped</title>
+<style>
+    p,
+    ul {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .main-box-stk {
+        border: 2px solid rgb(41, 146, 187);
+        border-radius: 6px;
+        background: rgb(198, 226, 238);
+        padding: 10px;
+    }
+
+    .un-sub {
+        font-size: .65em;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    @media screen and (min-width:770px) {
+        .stock-img {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    .stk-img{
+        margin-top: 10px;
+        background-color:#7eaff9;
+        border-radius: 6px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="main-box-stk">
+        <p> Hi Name,
+        <ul>
+            <li>🚀 Stock {{name}}</li>
+            <li>📉 Down by: {{pct}}</li>
+            <li>💰 Current price: {{pVal}}</li>
+            <li>🔼 52 Week High: {{hVal}}</li>
+            <li>🔽 52 Week Low: {{lVal}}</li>
+        </ul>
+        </p>
+    </div>
+    <div class="stk-img"><img class="stock-img" src="https://cdn.discordapp.com/attachments/795866620412428330/976157274173239306/it-is-the-time.jpg" alt="" width="100%"></div>
+    <p class="un-sub">If you wish to stop receiving emails from us, opt to <a href="">Unsubscribe</a></p>
+</body>
+
+</html>
