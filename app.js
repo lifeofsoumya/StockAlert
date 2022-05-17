@@ -75,7 +75,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 from: process.env.GID1,
                 to: process.env.TO,
                 subject: `Your Stock is Down by ${percentage}%`,
-                text: `<p>Your Stock named ${name}, is <b>Down by ${percentage}%</b>, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}</p>`,
+                text: `${process.env.GNM1}, Your Stock named ${name}, is Down by ${percentage}%, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}`,
                 HTMl: '<img src="https://media.discordapp.net/attachments/795866620412428330/964879836504023050/promo-indgeek.png" width="100%">'
             };
 
@@ -85,7 +85,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 if(err) {
                     console.log('Error Occurs ' + err);
                 } else {
-                    console.log('Email sent successfully ' + data);
+                    console.log('Email sent successfully');
                 }
             });
         }
