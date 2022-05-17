@@ -65,6 +65,9 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 auth: {
                     user: process.env.GID,
                     pass: process.env.GPW
+                },
+                tls: {
+                    rejectUnauthorized: false
                 }
             });
 
