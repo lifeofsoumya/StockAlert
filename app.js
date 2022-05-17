@@ -46,7 +46,19 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
     const downBy = await el5.getProperty('textContent');
     const downVal = await downBy.jsonValue();
 
+    // implementing if stock is down by more than 10%
 
+    downVal = downVal.replace(/\(.*?\)/gm, ""); // regex to remove bracket content
+    downVal = downVal.replace(/\+/g, ""); // regex to remove plus sign
+    downVal = downVal.replace(/\-/g, ""); // remove minus sign
+    priceVal = priceVal.replace(/\₹/g, ""); // remove rupees sign
+    let percentage = (priceVal/downVal)
+    console.log(downVal, priceVal, percentage)
+    
+    if (downVal > 10){
+        console.log(downVal);
+        console.log('ok more than 10 percent');
+    }
 
     // page.evaluate(() => {
     //     let allTitles = document.querySelectorAll('.mtp438CompanyName');
