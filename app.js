@@ -59,7 +59,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
     
     if (percentage*100 < 1000){ // by multiplying 100 to both side
         console.log('More than 10 percent');
-        ()=>{
+        function sendMail(){
             const mailTransporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -79,12 +79,13 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
             mailTransporter.sendMail(mailDetails, function(err, data) {
                 if(err) {
-                    console.log('Error Occurs');
+                    console.log('Error Occurs ' + err);
                 } else {
                     console.log('Email sent successfully');
                 }
             });
         }
+        sendMail()
     }
 
     // page.evaluate(() => {
