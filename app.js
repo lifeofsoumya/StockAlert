@@ -48,17 +48,17 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
     // implementing if stock is down by more than 10%
 
-    downVal = downVal.replace(/\(.*?\)/gm, ""); // regex to remove bracket content
-    downVal = downVal.replace(/\+/g, ""); // regex to remove plus sign
-    downVal = downVal.replace(/\-/g, ""); // remove minus sign
-    priceVal = priceVal.replace(/\₹/g, ""); // remove rupees sign
-    let percentage = (priceVal/downVal)
-    console.log(downVal, priceVal, percentage)
+    let downValMod = downVal.replace(/\(.*?\)/gm, ""); // regex to remove bracket content
+    downValMod = downValMod.replace(/\+/g, ""); // regex to remove plus sign
+    downValMod = downValMod.replace(/\-/g, ""); // remove minus sign
+    priceValMod = priceVal.replace(/\₹/g, ""); // remove rupees sign
+    let pTemp = (downValMod/priceValMod)*100
+    let percentage = parseFloat(pTemp).toFixed(2)
     
-    if (downVal > 10){
-        console.log(downVal);
-        console.log('ok more than 10 percent');
+    if (percentage*100 < 1000){ // by multiplying 100 to both side
+        console.log('ok less than 10 percent');
     }
+    else console.log('More than 10')
 
     // page.evaluate(() => {
     //     let allTitles = document.querySelectorAll('.mtp438CompanyName');
