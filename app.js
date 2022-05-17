@@ -77,7 +77,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
                 subject: `Your Stock is Down by ${percentage}%`,
                 text: `Hi ${process.env.GNM1},
                 Your Stock named '${stName}', is Down by '${percentage}%',
-                Current price '${priceVal}'.
+                Current price '${priceVal}',
                 The 52 Week high price is '${highVal}' & 52 Weeks low is '${lowVal}'`,
             };
 
