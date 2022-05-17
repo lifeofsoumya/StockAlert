@@ -47,6 +47,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
     const downVal = await downBy.jsonValue();
 
 
+
     // page.evaluate(() => {
     //     let allTitles = document.querySelectorAll('.mtp438CompanyName');
     // console.log("queryselect")
@@ -71,7 +72,7 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
         currentPrice: priceVal,
         lowPrice: lowVal,
         highPrice : highVal,
-        downBy : downVal
+        downB : downVal
     }
     console.log(stockApi)
     browser.close();    // close the temporary headless browser    
