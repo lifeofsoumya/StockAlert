@@ -3,6 +3,7 @@ const express = require('express');
 const cron = require('node-cron');
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 // const { title } = require('process');
 
@@ -58,6 +59,30 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
     
     if (percentage*100 < 1000){ // by multiplying 100 to both side
         console.log('More than 10 percent');
+        ()=>{
+            const mailTransporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.GID,
+                    pass: process.env.GPW
+                }
+            });
+
+            let mailDetails = {
+                from: process.env.GID,
+                to: process.env.TO,
+                subject: `Your Stock is Down by ${percentage}%`,
+                HTMl: `Your Stock named ${name}, is Down by ${percentage}%, Current price ${priceVal}. The 52 Week high price is ${highVal} & 52 Weeks low is ${lowVal}`
+            };
+
+            mailTransporter.sendMail(mailDetails, function(err, data) {
+                if(err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email sent successfully');
+                }
+            });
+        }
     }
     else console.log('Less than 10')
 
