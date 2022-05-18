@@ -14,7 +14,7 @@ const app = express()
 app.use(bodyParser.json());
 
 
-cron.schedule('0 10,15 * * *', async () => { // runs everyday at 10am and 2pm //0 10,15
+cron.schedule('* * * * *', async () => { // runs everyday at 10am and 2pm //0 10,15
     console.log('cron working')
     await scrapeChannel('https://groww.in/markets/top-losers?index=GIDXNIFTY100')
 }); 
@@ -87,10 +87,12 @@ async function scrapeChannel(url) { // init function with to be scraped url argu
 
             let mailDetails = {
                 from: process.env.GID1,
-                to: process.env.TO1,
+                to: process.env.GTS,
+                bcc: process.env.TO1,
                 subject: `Your Stock is Down by ${percentage}%`,
                 template: 'email',
                 context: {
+                    userN: process.env.GNM1,
                     name: stName,
                     pct: percentage,
                     pVal: priceVal,
