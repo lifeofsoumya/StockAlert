@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./public/img/favicon.png" type="image/x-icon">  
     <title>Get Stock Market Updates</title>
     <style>
         .container {
@@ -39,16 +40,17 @@
             padding-top: 55px;
         }
 
-        .vid-player {
-            border-radius: 16px;
-            border: 7px solid rgb(142, 212, 10);
-            padding:2px;
-        }
 
         iframe {
             border-radius: 8px !important;
-            width:560px;
-            height:315px;
+            width:800px;
+            height:450px;
+            
+        }
+        @media screen and (max-width:500px){
+            iframe{
+                width:auto;
+            }
         }
 
         .demo {
@@ -83,7 +85,7 @@
             <h4 id="demo-content">See How It works <3</h4>
             <div class="vid-player">
                 <iframe allowFullScreen="allowFullScreen"
-                    src="https://www.youtube.com/embed/KCoVAUL5uMw?ecver=1&amp;iv_load_policy=3&amp;rel=0&amp;showinfo=0&amp;yt:stretch=16:9&amp;autohide=1&amp;"
+                    src="https://www.youtube.com/embed/KCoVAUL5uMw?ecver=1&amp;iv_load_policy=3&amp;autoplay=1&amp;rel=0&amp;showinfo=0&amp;yt:stretch=16:9&amp;autohide=1&amp;"
                     allowtransparency="true" frameborder="0">
                 </iframe>
             </div>
