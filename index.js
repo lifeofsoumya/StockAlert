@@ -2,13 +2,21 @@ const express = require("express");
 const puppeteer = require("puppeteer");
 const cron = require("node-cron");
 const nodemailer = require("nodemailer");
-const hbs = require("nodemailer-express-handlebars");
+const eHbs = require("nodemailer-express-handlebars");
 const path = require("path");
+const bodyParser = require('body-parser')
 require("dotenv").config();
 const mongoose = require('mongoose') // mongo import
-var schema = require('./models/schema.js');
+const users = require("./models/schema.js");
 
 const app = express();
+
+app.set('views', path.join(__dirname, '/views/')); // important to find views
+app.use(bodyParser.urlencoded({extended:false }));
+app.use(express.json());
+// app.use(express.urlencoded({extended:true}));
+app.set('view engine', 'hbs'); // sets hbs as default engine
+app.use(express.static("public")); // uses public folder for static files
 
 cron.schedule("30 10,14 * * *", async () => {
   console.log("cron is working");
@@ -24,6 +32,30 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
 })
 .catch((err)=>{
   console.log(err);
+})
+
+app.get('/', (req, res)=>{
+    res.render('index')
+})
+
+
+// collecting data from users
+
+app.post ("/", (req, res) =>{
+  const userName = req.body.name;
+  const userEmail = req.body.email;
+  const user = new users({ // storing input in item schema with Item model
+    name: userName,
+    email: userEmail
+});
+  user.save((err, doc)=>{
+    if(!err){
+      res.redirect('./public/subscribed.html')
+    }
+    else{
+      console.log('error is: ' + err)
+    }
+  });
 })
 
 var stockApi;
@@ -94,7 +126,7 @@ async function scrapeChannel(url) {
         extName: ".handlebars"
       };
 
-      mailTransporter.use("compile", hbs(handlebarOptions));
+      mailTransporter.use("compile", eHbs(handlebarOptions));
 
       let mailDetails = {
         from: process.env.GID,
@@ -136,6 +168,8 @@ async function scrapeChannel(url) {
 }
 
 scrapeChannel("https://groww.in/markets/top-losers?index=GIDXNIFTY100");
+
+
 
 const port = process.env.PORT || 3000;
 
