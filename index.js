@@ -5,6 +5,8 @@ const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const path = require("path");
 require("dotenv").config();
+const mongoose = require('mongoose') // mongo import
+var schema = require('./models/schema.js');
 
 const app = express();
 
@@ -12,6 +14,17 @@ cron.schedule("30 10,14 * * *", async () => {
   console.log("cron is working");
   scrapeChannel("https://groww.in/markets/top-losers?index=GIDXNIFTY100");
 });
+
+
+// connection to mongoose
+
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
+.then(()=>{
+  console.log("DB Connected")
+})
+.catch((err)=>{
+  console.log(err);
+})
 
 var stockApi;
 
