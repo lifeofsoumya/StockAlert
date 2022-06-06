@@ -90,7 +90,7 @@ async function scrapeChannel(url) {
   const highVal = await highSrc.jsonValue();
 
   const [el5] = await page.$x(
-    "/html/body/div/div/div[2]/div[2]/div/div/div[1]/div/div/table/tbody/tr[1]/td[3]/div"
+    "/html/body/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/table/tbody/tr[1]/td[3]/div"
   );
   const downBy = await el5.getProperty("textContent");
   const downVal = await downBy.jsonValue();
@@ -155,6 +155,7 @@ async function scrapeChannel(url) {
   }
 
   console.log(percentage);
+  console.log(stockApi)
 
   stockApi = {
     stocksNamee: stName,
