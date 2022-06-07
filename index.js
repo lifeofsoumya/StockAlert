@@ -44,14 +44,14 @@ app.get('/', (req, res)=>{
 app.post ("/", (req, res) =>{
   const userName = req.body.name;
   const userEmail = req.body.email;
-  console.log(userName + userEmail)
+  console.log(userName + " \n" + userEmail)
   const user = new users({
     name: userName,
     email: userEmail
 });
   user.save((err, doc)=>{
     if(!err){
-      res.redirect('./public/subscribed.html')
+      res.redirect('./subscribed.html')
     }
     else{
       console.log('error is: ' + err)
@@ -104,56 +104,75 @@ async function scrapeChannel(url) {
   let pTemp = (downValMod / priceValMod) * 100;
   let percentage = parseFloat(pTemp).toFixed(2);
 
-  if (percentage * 100 < 1000) {
-    function sendMail() {
-      const mailTransporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.GID,
-          pass: process.env.GPW
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-      });
 
-      const handlebarOptions = {
-        viewEngine: {
-          extName: ".handlebars",
-          partialsDir: path.resolve("./views"),
-          defaultLayout: false
-        },
-        viewPath: path.resolve("./views"),
-        extName: ".handlebars"
-      };
+  // getting all the users
 
-      mailTransporter.use("compile", eHbs(handlebarOptions));
-
-      let mailDetails = {
-        from: process.env.GID,
-        to: process.env.GTO,
-        subject: `Your Stock is Down by ${percentage}%`,
-        template: "email",
-        context: {
-          userN: process.env.GNM,
-          name: stName,
-          pct: percentage,
-          pVal: priceVal,
-          hVal: highVal,
-          lVal: lowVal
-        }
-      };
-
-      mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-          console.log("Error Occurs " + err);
-        } else {
-          console.log("Email sent successfully");
-        }
-      });
+  users.find({}, function(err, allUsers){
+    if(err){
+        console.log(err);
     }
+    var mailList = [];
+    allUsers.forEach(function(users){
+        mailList.push(users.email);
+        return mailList;
+    });
+    
+    // making decision
+
+    if (percentage * 100 < 1000) {
+      function sendMail() {
+        const mailTransporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.GID,
+            pass: process.env.GPW
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+  
+        const handlebarOptions = {
+          viewEngine: {
+            extName: ".handlebars",
+            partialsDir: path.resolve("./views"),
+            defaultLayout: false
+          },
+          viewPath: path.resolve("./views"),
+          extName: ".handlebars"
+        };
+  
+        mailTransporter.use("compile", eHbs(handlebarOptions));
+  
+        let mailDetails = {
+          from: process.env.GID,
+          to: process.env.GTO,
+          bcc: mailList,
+          subject: `Your Stock is Down by ${percentage}%`,
+          template: "email",
+          context: {
+            userN: process.env.GNM,
+            name: stName,
+            pct: percentage,
+            pVal: priceVal,
+            hVal: highVal,
+            lVal: lowVal
+          }
+        };
+  
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs " + err);
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+      }
+  
+    }
+
     sendMail();
-  }
+});
 
   console.log(percentage);
 
