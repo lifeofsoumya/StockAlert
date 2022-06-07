@@ -44,7 +44,8 @@ app.get('/', (req, res)=>{
 app.post ("/", (req, res) =>{
   const userName = req.body.name;
   const userEmail = req.body.email;
-  const user = new users({ // storing input in item schema with Item model
+  console.log(userName + userEmail)
+  const user = new users({
     name: userName,
     email: userEmail
 });
@@ -155,7 +156,6 @@ async function scrapeChannel(url) {
   }
 
   console.log(percentage);
-  console.log(stockApi)
 
   stockApi = {
     stocksNamee: stName,
