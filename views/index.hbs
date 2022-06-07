@@ -56,6 +56,12 @@
         .demo {
             text-align: center;
         }
+        .fund{
+            padding: 15px 20px;
+            border: 2px solid rgb(3, 196, 138);
+            border-radius: 3px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
     </style>
 </head>
 
@@ -66,7 +72,11 @@
             <form action="/" method="post">
                 <input class="u-put" type="text" name="name" placeholder="Enter your Name" autocomplete="off" required>
                 <input class="u-put" type="email" name="email" placeholder="Enter your Email" required>
-                <input type="submit" class="sub-btn" value="Subscribe" />
+                    <select name="funds" class="fund">
+                        <option value="javascript">NIFTY 100</option>
+                        <option value="php">NIFTY 500</option>
+                    </select>
+                <input type="submit" class="sub-btn" value="Submit" />
             </form>
         </div>
         <div class="demo">
