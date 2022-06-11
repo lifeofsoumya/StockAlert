@@ -116,7 +116,7 @@ async function scrapeChannel(url) {
         mailList.push(users.email);
         return mailList;
     });
-    
+
     // making decision
 
     if (percentage * 100 < 1000) {
@@ -168,16 +168,17 @@ async function scrapeChannel(url) {
           }
         });
       }
-  
+      
+      sendMail();
     }
 
-    sendMail();
-});
+  });
+
 
   console.log(percentage);
 
   stockApi = {
-    stocksNamee: stName,
+    stocksName: stName,
     currentPrice: priceVal,
     lowPrice: lowVal,
     highPrice: highVal,
