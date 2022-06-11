@@ -4,7 +4,14 @@
 
 ## Demo
 
+![App Screenshot](https://media.discordapp.net/attachments/941650096855068752/985027097254826104/unknown.png)
+
+![App Screenshot](https://media.discordapp.net/attachments/941650096855068752/985027319959814175/unknown.png?width=1440&height=508)
+
+### JSON Response
+
 ![App Screenshot](https://cdn.discordapp.com/attachments/827860774163841024/950773974009249892/loser-stock-api-demo.jpg)
+
 
 
 ## Optimizations
