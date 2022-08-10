@@ -12,6 +12,10 @@
 "routes": [
     { "src": "/(.*)", "dest": "index.js" }
 ],
+"engines": {
+  "node": "16.13.0",
+  "npm": "8.10.0"
+},
   "author": "",
   "license": "ISC",
   "dependencies": {
