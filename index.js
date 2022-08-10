@@ -119,7 +119,7 @@ async function scrapeChannel(url) {
 
     // making decision
 
-    if (percentage * 100 < 1000) {
+    if (percentage * 100 > 1000) {
       function sendMail() {
         const mailTransporter = nodemailer.createTransport({
           service: "gmail",
