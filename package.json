@@ -2,10 +2,16 @@
   "name": "data-api-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "builds": [
+    { "src": "index.js", "use": "@now/node" }
+],
+"routes": [
+    { "src": "/(.*)", "dest": "index.js" }
+],
   "author": "",
   "license": "ISC",
   "dependencies": {
