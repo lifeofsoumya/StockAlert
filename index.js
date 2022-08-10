@@ -192,12 +192,12 @@ scrapeChannel("https://groww.in/markets/top-losers?index=GIDXNIFTY100");
 
 
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send(stockApi);
 });
 
-app.listen(port, () => {
-  console.log(`server started at port ${port}`);
+app.listen(PORT, () => {
+  console.log(`server started at PORT ${PORT}`);
 });
