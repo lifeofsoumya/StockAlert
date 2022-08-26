@@ -1,5 +1,5 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const puppeteer = require('puppeteer-core');
 const cron = require("node-cron");
 const nodemailer = require("nodemailer");
 const eHbs = require("nodemailer-express-handlebars");
@@ -8,6 +8,10 @@ const bodyParser = require('body-parser')
 require("dotenv").config();
 const mongoose = require('mongoose') // mongo import
 const users = require("./models/schema.js");
+
+
+// console.log('TRYING TO FETCH BROWSER')
+
 
 const app = express();
 
@@ -62,7 +66,12 @@ app.post ("/", (req, res) =>{
 var stockApi;
 
 async function scrapeChannel(url) {
-  const browser = await puppeteer.launch();
+  const browserFetcher = puppeteer.createBrowserFetcher();
+  let revisionInfo = await browserFetcher.download('884014');
+  const browser = await puppeteer.launch({
+    executablePath: revisionInfo.executablePath,
+    args: ['--no-sandbox', "--disabled-setupid-sandbox"]
+  });
   const page = await browser.newPage();
   await page.goto(url);
 
