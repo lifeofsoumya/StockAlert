@@ -201,7 +201,7 @@ scrapeChannel("https://groww.in/markets/top-losers?index=GIDXNIFTY100");
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send(stockApi);
 });
 
