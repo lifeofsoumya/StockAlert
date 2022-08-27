@@ -1,5 +1,5 @@
 const express = require("express");
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const cron = require("node-cron");
 const nodemailer = require("nodemailer");
 const eHbs = require("nodemailer-express-handlebars");
@@ -66,11 +66,9 @@ app.post ("/", (req, res) =>{
 var stockApi;
 
 async function scrapeChannel(url) {
-  const browserFetcher = puppeteer.createBrowserFetcher();
-  let revisionInfo = await browserFetcher.download('884014');
   const browser = await puppeteer.launch({
-    executablePath: revisionInfo.executablePath,
-    args: ['--no-sandbox', "--disabled-setupid-sandbox"]
+    headless: true,
+    args: ['--no-sandbox']
   });
   const page = await browser.newPage();
   await page.goto(url);
